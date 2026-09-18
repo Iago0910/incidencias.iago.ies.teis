@@ -64,7 +64,9 @@ insert into registro (aula, descripcion, usuario, estado) values ('Taller1', 'Pc
 ## Configurar git hub
 1. Crear repositorio local
 ```
-
+git init
+git add .
+git commit -m "Añadido base de datos, con usuario ty tabla de registro de incidencias e instrucciones de git/github"
 ```
 2. Crear cuenta github, crear repositorio en github
 3. Conectar repositorio local con remoto
