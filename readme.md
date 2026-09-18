@@ -39,3 +39,37 @@ Recibe solicitudes http de clientes y responde con la pagina web solicitada al n
     ` sudo a2ensite incidencias.iago.ies.teis `  
 
     ` systemctl reload apache2 `
+8. Instalar mysql server
+` sudo apt install mysql-server `
+9. Configurar sql
+```
+create database incidencias;
+create user 'incidencias@localhost' identified by 'incidencias';
+flush privileges;
+grant all privileges on incidencias.* to 'incidencias'@'localhost';
+select user, host from mysql.user;
+-- Crear tabla
+create table registro (
+    -> id int auto_increment primary key,
+    -> aula varchar(30),
+    -> descripcion text,
+    -> usuario varchar(20),
+    -> estado varchar(30)
+    -> );
+-- Introducir datos
+insert into registro (aula, descripcion, usuario, estado) values ('Taller1', 'Pc 24 no arranca', 'ifpereira', 'ABIERTA'),('Taller1','Cae monitor','ifpereira','ABIERTA');
+```
+
+# Manual instalacion aplicacion
+## Configurar git hub
+1. Crear repositorio local
+```
+
+```
+2. Crear cuenta github, crear repositorio en github
+3. Conectar repositorio local con remoto
+```
+git remote add origin url-repositorio
+git branch -M main
+git push -u origin main
+```
