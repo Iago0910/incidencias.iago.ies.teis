@@ -202,7 +202,7 @@ def crear_incidencia():
     print("Usuario:" + usuario)
     print("Descripcion:" + descripcion)
 
-    return "Incidencia recibida"
+    return "<h1>Incidencia recibida</h1><ul> <li> Aula: " + aula + " </li></ul>"
 
 if __name__ == "__main__":
     app.run(debug=True)
@@ -232,3 +232,45 @@ if __name__ == "__main__":
 3. Probamos a rellenar el formulario y fijarnos en que los datos salen en la terminal y nos devuelve incidencia recibida
 
 ## Introducir los datos en la BD
+Paso final para escribir en la BD
+
+1. Importamo el conector de MYSQL despues de las importanciones de Flask.
+```python
+import mysql.connector
+```
+2. Modificamos el codigo de python para añadir la conexion con la base de datos 
+```python
+    conexion = mysql.connector.connect(
+        host="localhost",
+        user="incidencias",
+        password="incidencias",
+        database="incidencias"
+    )
+
+    cursor = conexion.cursor()
+
+    sql = """INSERT INTO registro (aula, usuario, descripcion, estado) VALUES (%s, %s, %s, %s)"""
+
+    valores = (aula, usuario, descripcion, "ABIERTA")
+
+    cursor.execute(sql, valores)
+
+    conexion.commit()
+
+    cursor.close()
+    conexion.close()
+```
+
+## Ajustar el return para mostrar un html correcto
+1. Ajustamos la linea return.
+```python
+    return f"""
+        <h1>Incidencia creada correctamente</h1>
+        <ul>
+            <li>Aula: {aula}</li>
+            <li>Usuario: {usuario}</li>
+            <li>Descripcion: {descripcion}</li>
+        </ul>
+"""
+
+```
